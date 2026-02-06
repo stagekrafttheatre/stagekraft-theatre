@@ -1070,38 +1070,3 @@ a {
 }
 
 
-/* Collapsible Form Styles */
-.collapsible-form-container {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, margin-top 0.3s ease-in-out;
-    opacity: 0;
-    margin-top: 0;
-}
-
-.collapsible-form-container.active {
-    max-height: 3000px; /* Large enough to accommodate the full form */
-    opacity: 1;
-    margin-top: 1.5rem;
-}
-
-.collapsible-form-container iframe {
-    width: 100%;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background: #fff;
-}
-
-/* Ensure apply button works as a button */
-.apply-btn {
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.apply-btn:hover {
-    transform: translateY(-2px);
-}
-
-.apply-btn:active {
-    transform: translateY(0);
-}
