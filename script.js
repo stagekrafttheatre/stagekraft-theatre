@@ -91,11 +91,37 @@ const observer = new IntersectionObserver(function(entries) {
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', function() {
     const animatedElements = document.querySelectorAll('.service-card, .gallery-item, .blog-post, .job-card');
-    
+
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
         observer.observe(el);
     });
+    
+    // Collapsible Job Application Form
+    const applyBtn = document.getElementById('stagehand-apply-btn');
+    const formContainer = document.getElementById('stagehand-form-container');
+
+    if (applyBtn && formContainer) {
+        applyBtn.addEventListener('click', function() {
+            // Toggle the active class
+            formContainer.classList.toggle('active');
+
+            // Change button text
+            if (formContainer.classList.contains('active')) {
+                applyBtn.textContent = 'Hide Form';
+
+                // Smooth scroll to form after a brief delay to allow expansion to start
+                setTimeout(function() {
+                    formContainer.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest'
+                    });
+                }, 100);
+            } else {
+                applyBtn.textContent = 'Apply Now';
+            }
+        });
+    }
 });
