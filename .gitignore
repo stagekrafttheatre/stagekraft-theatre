@@ -1,0 +1,27 @@
+# Snapshots
+.snapshots/
+.snapshignore
+
+# Claude worktrees
+.claude/
+
+# Logo generation utilities
+logo.html
+logo.py
+stagekraft_logo*.png
+update_manifest.py
+
+# Documentation
+collapsible_form_impl.md
+
+# IO working directory
+io/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
