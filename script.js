@@ -87,6 +87,7 @@ async function loadMomentsGallery() {
         const res = await fetch('/stagekraft-theatre/images/manifest.json');
         if (!res.ok) throw new Error('manifest not found');
         filenames = await res.json();
+        console.log('Moments manifest loaded:', filenames);
     } catch (e) {
         console.warn('Our Moments: could not load images/manifest.json', e);
     }
