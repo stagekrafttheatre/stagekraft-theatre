@@ -84,7 +84,7 @@ async function loadMomentsGallery() {
 
     let filenames = [];
     try {
-        const res = await fetch('images/manifest.json');
+        const res = await fetch('/stagekraft-theatre/images/manifest.json');
         if (!res.ok) throw new Error('manifest not found');
         filenames = await res.json();
     } catch (e) {
