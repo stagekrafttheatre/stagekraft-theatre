@@ -102,12 +102,12 @@ async function loadMomentsGallery() {
         item.className = 'moment-item';
 
         const img = document.createElement('img');
-        img.src = `images/${filename}`;
+        img.src = `/stagekraft-theatre/images/${filename}`;
         img.alt = filename.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
         img.loading = 'lazy';
 
         item.appendChild(img);
-        item.addEventListener('click', () => openLightbox(`images/${filename}`));
+        item.addEventListener('click', () => openLightbox(`/stagekraft-theatre/images/${filename}`));
         grid.appendChild(item);
     });
 
