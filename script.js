@@ -73,6 +73,83 @@ window.addEventListener('scroll', function() {
     });
 });
 
+// ============================================
+// OUR MOMENTS GALLERY
+// ============================================
+
+async function loadMomentsGallery() {
+    const grid = document.getElementById('moments-grid');
+    const empty = document.getElementById('moments-empty');
+    if (!grid) return;
+
+    let filenames = [];
+    try {
+        const res = await fetch('images/manifest.json');
+        if (!res.ok) throw new Error('manifest not found');
+        filenames = await res.json();
+    } catch (e) {
+        console.warn('Our Moments: could not load images/manifest.json', e);
+    }
+
+    if (!Array.isArray(filenames) || filenames.length === 0) {
+        grid.style.display = 'none';
+        if (empty) empty.style.display = 'block';
+        return;
+    }
+
+    filenames.forEach(filename => {
+        const item = document.createElement('div');
+        item.className = 'moment-item';
+
+        const img = document.createElement('img');
+        img.src = `images/${filename}`;
+        img.alt = filename.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+        img.loading = 'lazy';
+
+        item.appendChild(img);
+        item.addEventListener('click', () => openLightbox(`images/${filename}`));
+        grid.appendChild(item);
+    });
+
+    // Animate new items via existing observer
+    grid.querySelectorAll('.moment-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        observer.observe(el);
+    });
+}
+
+// Lightbox
+function openLightbox(src) {
+    let lightbox = document.querySelector('.moments-lightbox');
+    if (!lightbox) {
+        lightbox = document.createElement('div');
+        lightbox.className = 'moments-lightbox';
+        lightbox.innerHTML = `
+            <button class="lightbox-close" aria-label="Close">&times;</button>
+            <img src="" alt="Photo">
+        `;
+        document.body.appendChild(lightbox);
+
+        lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+    }
+
+    lightbox.querySelector('img').src = src;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    const lightbox = document.querySelector('.moments-lightbox');
+    if (lightbox) lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('DOMContentLoaded', loadMomentsGallery);
+
 // Intersection Observer for fade-in animations
 const observerOptions = {
     threshold: 0.1,

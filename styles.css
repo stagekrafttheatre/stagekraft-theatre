@@ -544,6 +544,126 @@ a {
 }
 
 /* ============================================
+   OUR MOMENTS SECTION
+   ============================================ */
+
+.moments {
+    padding: var(--spacing-xl) 0;
+    background: var(--cream);
+}
+
+.moments-grid {
+    columns: 3;
+    column-gap: var(--spacing-sm);
+}
+
+.moment-item {
+    break-inside: avoid;
+    margin-bottom: var(--spacing-sm);
+    overflow: hidden;
+    border-radius: 6px;
+    position: relative;
+    cursor: pointer;
+}
+
+.moment-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: saturate(0.9);
+}
+
+.moment-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(107, 15, 42, 0.35) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 6px;
+}
+
+.moment-item:hover img {
+    transform: scale(1.05);
+    filter: saturate(1.1);
+}
+
+.moment-item:hover::after {
+    opacity: 1;
+}
+
+.moments-empty {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--burgundy);
+    font-style: italic;
+    padding: var(--spacing-lg);
+}
+
+/* Lightbox */
+.moments-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 10, 10, 0.93);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.moments-lightbox.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.moments-lightbox img {
+    max-width: 90vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 2.5rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: var(--transition-smooth);
+    font-family: var(--font-display);
+}
+
+.lightbox-close:hover {
+    color: var(--cream);
+    transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+    .moments-grid {
+        columns: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .moments-grid {
+        columns: 1;
+    }
+}
+
+/* ============================================
    CONTACT SECTION
    ============================================ */
 
